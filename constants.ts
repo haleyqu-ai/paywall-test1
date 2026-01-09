@@ -108,3 +108,27 @@ export const COMPARISON_DATA: FeatureGroup[] = [
     ]
   }
 ];
+
+export const CREDIT_PACKAGES = [
+  {
+    id: 'pkg-1',
+    price: 8,
+    credits: '200 + 200 credits',
+    subtext: '($4.00-$2.00 / 100 credits)',
+    badge: '2X Credits - Holiday Offer'
+  },
+  {
+    id: 'pkg-2',
+    price: 32,
+    credits: '1,000 + 1,000 credits',
+    subtext: '($3.20-$1.60 / 100 credits)',
+    badge: '2X Credits - Holiday Offer'
+  },
+  {
+    id: 'pkg-3',
+    price: 96,
+    credits: '4,000 + 4,000 credits',
+    subtext: '($2.40-$1.20 / 100 credits)',
+    badge: '2X Credits - Holiday Offer'
+  }
+];
