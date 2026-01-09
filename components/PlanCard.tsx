@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Plan, BillingInterval } from '../types';
+import { Plan, BillingInterval } from '../types.ts';
 
 interface PlanCardProps {
   plan: Plan;
@@ -17,7 +17,6 @@ export const PlanCard: React.FC<PlanCardProps> = ({ plan, billing }) => {
 
   return (
     <div className={`h-full flex flex-col bg-[#161616] rounded-3xl overflow-hidden border border-zinc-900 relative`}>
-      {/* Holiday Offer Header Banner */}
       {plan.holidayOffer && billing === BillingInterval.YEARLY && (
         <div className={`py-2 px-4 text-center text-[10px] font-bold flex items-center justify-center gap-1 ${
           isPro ? 'bg-[#c6ff00] text-black' : 'bg-[#ff4ecd] text-white'
@@ -30,7 +29,6 @@ export const PlanCard: React.FC<PlanCardProps> = ({ plan, billing }) => {
       )}
 
       <div className="p-6 flex flex-col flex-grow">
-        {/* Badge Area */}
         <div className="flex justify-between items-start mb-4">
           <h2 className={`text-3xl font-bold tracking-tight ${
             isPro ? 'text-blue-400' : isStudio ? 'text-purple-400' : 'text-[#c6ff00]'
@@ -44,7 +42,6 @@ export const PlanCard: React.FC<PlanCardProps> = ({ plan, billing }) => {
 
         <p className="text-zinc-400 text-sm mb-6 leading-tight">{plan.tagline}</p>
 
-        {/* Pricing Section */}
         <div className="mb-8">
           <div className="flex items-baseline gap-1.5">
             {originalPrice && price > 0 && (
@@ -66,7 +63,6 @@ export const PlanCard: React.FC<PlanCardProps> = ({ plan, billing }) => {
           {isFree ? 'Essentials to get started:' : isPro ? 'Everything in Free, plus:' : 'Everything in Pro, plus:'}
         </div>
 
-        {/* Features List */}
         <div className="space-y-3.5 overflow-y-auto max-h-[45vh] hide-scrollbar">
           {plan.features.map((feature, idx) => (
             <div key={idx} className="flex items-start gap-3">

@@ -1,14 +1,14 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { BillingInterval } from './types';
-import { PLANS, ENTERPRISE_PLAN, CREDIT_PACKAGES } from './constants';
-import { PlanCard } from './components/PlanCard';
-import { PlanSelector } from './components/PlanSelector';
-import { ComparisonTable } from './components/ComparisonTable';
+import { BillingInterval } from './types.ts';
+import { PLANS, ENTERPRISE_PLAN, CREDIT_PACKAGES } from './constants.ts';
+import { PlanCard } from './components/PlanCard.tsx';
+import { PlanSelector } from './components/PlanSelector.tsx';
+import { ComparisonTable } from './components/ComparisonTable.tsx';
 
 const App: React.FC = () => {
   const [billing, setBilling] = useState<BillingInterval>(BillingInterval.YEARLY);
-  const [activePlanIndex, setActivePlanIndex] = useState(1); // Default to Pro (Index 1)
+  const [activePlanIndex, setActivePlanIndex] = useState(1);
   const [selectedCreditPkg, setSelectedCreditPkg] = useState('pkg-1');
   const [isSectionVisible, setIsSectionVisible] = useState(true);
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -16,7 +16,6 @@ const App: React.FC = () => {
   const comparisonRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Scroll to Pro by default on mount
     if (sliderRef.current) {
       const cardWidth = sliderRef.current.offsetWidth * 0.85;
       sliderRef.current.scrollTo({
@@ -25,7 +24,6 @@ const App: React.FC = () => {
       });
     }
 
-    // Set up IntersectionObserver to track if we are in the plans slider area
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsSectionVisible(entry.isIntersecting);
@@ -65,14 +63,10 @@ const App: React.FC = () => {
     comparisonRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Only show the sticky footer if:
-  // 1. We are vertically in the plans section
-  // 2. The active plan is Pro or Studio (index 1 or 2)
   const isFooterActive = isSectionVisible && (activePlanIndex === 1 || activePlanIndex === 2);
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col overflow-x-hidden pb-20">
-      {/* Top Header */}
       <header className="px-5 py-4 flex justify-between items-center sticky top-0 z-50 bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-zinc-900">
         <button 
           onClick={scrollToComparison}
@@ -105,9 +99,7 @@ const App: React.FC = () => {
         </div>
       </header>
 
-      {/* Main Container */}
       <main className="flex-grow">
-        {/* Toggle with Holiday Offer style */}
         <div className="flex flex-col items-center mt-6">
           <div className="bg-[#141414] p-1.5 rounded-2xl flex items-center border border-zinc-800">
             <button
@@ -130,7 +122,6 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        {/* Top Tab Navigation */}
         <div className="mt-8 px-4">
           <PlanSelector 
             plans={PLANS} 
@@ -139,9 +130,7 @@ const App: React.FC = () => {
           />
         </div>
 
-        {/* Section Ref for Intersection Tracking */}
         <div ref={plansSectionRef}>
-          {/* Main Slider (Free, Pro, Studio) */}
           <div 
             ref={sliderRef}
             onScroll={handleScroll}
@@ -158,7 +147,6 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        {/* Enterprise Card (Below Slider) */}
         <div className="px-6 mb-8">
            <div className="bg-[#161616] rounded-3xl p-8 border border-zinc-900">
              <div className="flex flex-col">
@@ -194,7 +182,6 @@ const App: React.FC = () => {
            </div>
         </div>
 
-        {/* Education Section */}
         <div className="px-6 mb-8">
           <div className="bg-gradient-to-r from-[#1a1a1a] to-[#222] rounded-3xl p-6 border border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
@@ -207,7 +194,6 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        {/* Purchase Extra Credits Section */}
         <div className="px-6 mb-16">
           <div className="bg-[#161616] rounded-3xl p-6 border border-zinc-900">
             <div className="text-center mb-6">
@@ -259,13 +245,11 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        {/* Detailed Comparison */}
         <div ref={comparisonRef}>
           <ComparisonTable />
         </div>
       </main>
 
-      {/* Footer Sticky Bar (Only visible for Pro/Studio and when in plan section) */}
       <div 
         className={`fixed bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a] to-transparent z-40 transition-all duration-300 transform ${
           isFooterActive ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-full opacity-0 pointer-events-none'

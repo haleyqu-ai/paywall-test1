@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { COMPARISON_DATA, PLANS } from '../constants';
+import { COMPARISON_DATA, PLANS } from '../constants.ts';
 
 export const ComparisonTable: React.FC = () => {
   return (

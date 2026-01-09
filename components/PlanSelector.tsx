@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Plan } from '../types';
+import { Plan } from '../types.ts';
 
 interface PlanSelectorProps {
   plans: Plan[];
@@ -24,7 +24,6 @@ export const PlanSelector: React.FC<PlanSelectorProps> = ({ plans, activeIndex, 
           </button>
         ))}
       </div>
-      {/* Animated underline */}
       <div 
         className="absolute bottom-0 h-[3px] bg-[#c6ff00] transition-all duration-300 ease-out rounded-full shadow-[0_0_10px_rgba(198,255,0,0.5)]"
         style={{ 
